@@ -6,7 +6,7 @@
 
 namespace ZF\Rest;
 
-use Zend\Loader\StandardAutoloader;
+use Zend\Mvc\Application;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -33,6 +33,7 @@ class Module
      */
     public function onBootstrap(MvcEvent $e)
     {
+        /** @var Application $app */
         $app      = $e->getTarget();
         $services = $app->getServiceManager();
         $events   = $app->getEventManager();

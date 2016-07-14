@@ -65,7 +65,7 @@ interface ResourceInterface extends EventManagerAwareInterface
     /**
      * Update (replace) an existing collection of records
      *
-     * @param  array $data
+     * @param  array|object $data
      * @return array|object
      */
     public function replaceList($data);
@@ -78,6 +78,14 @@ interface ResourceInterface extends EventManagerAwareInterface
      * @return array|object
      */
     public function patch($id, $data);
+
+    /**
+     * Partial update an existing collection of records
+     *
+     * @param  array|object $data
+     * @return array|object
+     */
+    public function patchList($data);
 
     /**
      * Delete an existing record

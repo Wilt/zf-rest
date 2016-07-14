@@ -46,6 +46,9 @@ abstract class AbstractResourceListener implements ListenerAggregateInterface
 
     /**
      * Set the entity_class for the controller config calling this resource
+     *
+     * @param string $className
+     * @return self
      */
     public function setEntityClass($className)
     {
