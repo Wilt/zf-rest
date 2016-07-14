@@ -208,7 +208,7 @@ class Resource implements ResourceInterface
      *
      * Lazy-instantiates an EM instance if none provided.
      *
-     * @return EventManagerInterface
+     * @return EventManagerInterface|EventManager
      */
     public function getEventManager()
     {

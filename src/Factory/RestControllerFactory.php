@@ -9,6 +9,7 @@ namespace ZF\Rest\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\EventManager\Event;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\Mvc\Controller\ControllerManager;
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\Exception\ServiceNotFoundException;
@@ -34,7 +35,7 @@ class RestControllerFactory implements AbstractFactoryInterface
      *
      * Provided for backwards compatibility; proxies to canCreate().
      *
-     * @param ContainerInterface $controllers
+     * @param ContainerInterface $container
      * @param string $requestedName
      * @return bool
      */
@@ -89,14 +90,14 @@ class RestControllerFactory implements AbstractFactoryInterface
      *
      * Provided for backwards compatibility; proxies to canCreate().
      *
-     * @param ServiceLocatorInterface $controllers
+     * @param ServiceLocatorInterface|ControllerManager $serviceLocator
      * @param string $name
      * @param string $requestedName
      * @return bool
      */
-    public function canCreateServiceWithName(ServiceLocatorInterface $controllers, $name, $requestedName)
+    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $container = $controllers->getServiceLocator() ?: $controllers;
+        $container = $serviceLocator->getServiceLocator() ?: $serviceLocator;
         return $this->canCreate($container, $requestedName);
     }
 
@@ -179,15 +180,15 @@ class RestControllerFactory implements AbstractFactoryInterface
      *
      * Provided for backwards compatibility; proxies to __invoke().
      *
-     * @param ServiceLocatorInterface $controllers
+     * @param ServiceLocatorInterface|ControllerManager $serviceLocator
      * @param string $name
      * @param string $requestedName
      * @return RestController
      * @throws ServiceNotCreatedException if listener specified is not a ListenerAggregate
      */
-    public function createServiceWithName(ServiceLocatorInterface $controllers, $name, $requestedName)
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
     {
-        $container = $controllers->getServiceLocator() ?: $controllers;
+        $container = $serviceLocator->getServiceLocator() ?: $serviceLocator;
         return $this($container, $requestedName);
     }
 

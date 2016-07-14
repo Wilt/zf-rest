@@ -7,6 +7,8 @@
 namespace ZF\Rest;
 
 use Zend\EventManager\EventManagerAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use ZF\MvcAuth\Identity\IdentityInterface;
 
 /**
  * Interface describing operations for a given resource.
@@ -117,4 +119,26 @@ interface ResourceInterface extends EventManagerAwareInterface
      * @return \Zend\Paginator\Paginator
      */
     public function fetchAll();
+
+    /**
+     * @param null|IdentityInterface $identity
+     * @return self
+     */
+    public function setIdentity(IdentityInterface $identity = null);
+
+    /**
+     * @return null|IdentityInterface
+     */
+    public function getIdentity();
+
+    /**
+     * @param null|InputFilterInterface $inputFilter
+     * @return self
+     */
+    public function setInputFilter(InputFilterInterface $inputFilter = null);
+
+    /**
+     * @return null|InputFilterInterface
+     */
+    public function getInputFilter();
 }

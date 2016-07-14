@@ -110,8 +110,8 @@ class OptionsListener implements ListenerAggregateInterface
     /**
      * Create the Allow header
      *
-     * @param  array $options
-     * @param  Response $response
+     * @param array $options
+     * @param Response $response
      */
     protected function createAllowHeader(array $options, Response $response)
     {
@@ -136,7 +136,7 @@ class OptionsListener implements ListenerAggregateInterface
     }
 
     /**
-     * Prepare a 405 response
+     * Prepare a 405 ('method not allowed') response
      *
      * @param  MvcEvent $event
      * @param  array $options
@@ -145,7 +145,7 @@ class OptionsListener implements ListenerAggregateInterface
     protected function get405Response(MvcEvent $event, array $options)
     {
         $response = $this->getOptionsResponse($event, $options);
-        $response->setStatusCode(405, 'Method Not Allowed');
+        $response->setStatusCode(405);
         return $response;
     }
 
@@ -159,7 +159,7 @@ class OptionsListener implements ListenerAggregateInterface
      *
      * @param mixed $config
      * @param mixed $matches
-     * @return void
+     * @return array
      */
     protected function getConfigForControllerAndMatches($config, $matches)
     {
